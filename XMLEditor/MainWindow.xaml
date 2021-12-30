@@ -1,0 +1,34 @@
+﻿<Window x:Class="XMLEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XMLEditor"
+        mc:Ignorable="d" Height="450" Width="800" MinWidth="800" MinHeight="450" 
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" 
+        Background="#FF4515A0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="Transparent" MouseDown="DraggableWindow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="ICON" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue"></Label>
+            <StackPanel Grid.Column="1">
+
+            </StackPanel>
+            <Border Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="White" BorderThickness="0 0 0 1" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+    </Grid>
+</Window>
