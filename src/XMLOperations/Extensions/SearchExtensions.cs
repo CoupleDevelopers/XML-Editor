@@ -64,6 +64,6 @@ namespace XMLOperations.Extensions
         /// </summary>
         private static IEnumerable<XElement> CheckForAttributeFilter
             (this IEnumerable<XElement> query, NodeAttributeFilter filter, Func<XElement, XElement?> element)
-            => !filter.IsValid ? query : query.Where(x => element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && (x.Value ?? "") == filter.Value) != null);
+            => !filter.IsValid ? query : query.Where(x => element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && x.Value == filter.Value) != null);
     }
 }
