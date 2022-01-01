@@ -24,4 +24,10 @@
     <ProjectReference Include="..\..\src\XMLOperations\XMLOperations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="assets\XMLFile1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

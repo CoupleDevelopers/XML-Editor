@@ -1,5 +1,7 @@
-﻿using System.Xml.Linq;
+﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using XMLOperations.Types;
+[assembly: InternalsVisibleTo("XMLOperations.Tests")]
 
 namespace XMLOperations.Extensions
 {
@@ -33,7 +35,7 @@ namespace XMLOperations.Extensions
         /// </summary>
         private static IEnumerable<XElement> ChildFilter
             (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement> func)
-            => query.SelectMany(x => x.Elements().CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func));
+            => filter == null ? query : query.Where(x => x.Elements().CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func).Any());
 
         /// <summary>
         /// Filters xml nodes having given element name
@@ -64,6 +66,6 @@ namespace XMLOperations.Extensions
         /// </summary>
         private static IEnumerable<XElement> CheckForAttributeFilter
             (this IEnumerable<XElement> query, NodeAttributeFilter filter, Func<XElement, XElement?> element)
-            => !filter.IsValid ? query : query.Where(x => element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && x.Value == filter.Value) != null);
+            => !filter.IsValid ? query : query.Where(x => (bool)(element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && x.Value == filter.Value)));
     }
 }

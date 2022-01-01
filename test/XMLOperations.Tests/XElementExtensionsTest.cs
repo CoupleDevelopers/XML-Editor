@@ -4,7 +4,7 @@ using XMLOperations.Extensions;
 
 namespace XMLOperations.Tests
 {
-    public class XElementExtensionsShould
+    public class XElementExtensionsTest
     {
         [Fact(DisplayName = nameof(AllowAttributeCheck))]
         public void AllowAttributeCheck()
