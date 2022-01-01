@@ -9,6 +9,10 @@ namespace XMLOperations
         /// </summary>
         public class XmlNodeSearchModel
         {
+            public XmlNodeSearchModel()
+            {
+            }
+
             public string RootFolder { get; set; }
             public string ParentName { get; set; }
             public NodeFilter ParentFilter { get; set; }
@@ -23,14 +27,20 @@ namespace XMLOperations
         /// </summary>
         public class NodeFilter
         {
+            public NodeFilter(string attribute, string value)
+            {
+                Attribute = attribute;
+                Value = value;
+            }
+
             public string Attribute { get; set; }
             public string Value { get; set; }
         }
-        
+
         /// <summary>
         /// Optional configuration for searched pattern
         /// </summary>
-        class Config
+        private class Config
         {
             private bool SearchAll { get; set; }
         }

@@ -18,7 +18,7 @@ namespace XMLOperations
                                     x.Parent.Attribute(model.ParentFilter.Attribute) != null &&
                                     x.Parent.Attribute(model.ParentFilter.Attribute).Value == model.ParentFilter.Value);
             }
-
+            
             // filter by child
             if (!string.IsNullOrEmpty(model.ChildName))
             {

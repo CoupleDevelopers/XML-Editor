@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XMLEditor", "XMLEditor.csproj", "{85F9B8FA-EBD2-47FD-88DB-E7B5AC9E9C23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XMLEditor", "src\XMLEditor\XMLEditor.csproj", "{85F9B8FA-EBD2-47FD-88DB-E7B5AC9E9C23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLOperations", "..\XMLOperations\XMLOperations.csproj", "{3FFE7114-AE8A-4A9E-808E-C28FB2E18442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XMLOperations", "src\XMLOperations\XMLOperations.csproj", "{3FFE7114-AE8A-4A9E-808E-C28FB2E18442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLOperations.Tests", "..\XMLOperations.Tests\XMLOperations.Tests.csproj", "{ADECB4AA-144F-4502-A39D-AB445FA08BD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XMLOperations.Tests", "test\XMLOperations.Tests\XMLOperations.Tests.csproj", "{ADECB4AA-144F-4502-A39D-AB445FA08BD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{21556854-19FA-421C-9DE3-8516758EE865}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{969C3E01-D636-4569-B11E-68B5CFF1BB57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4FABDBB-952C-4FC5-B1E2-0D3CF497961C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +39,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{85F9B8FA-EBD2-47FD-88DB-E7B5AC9E9C23} = {21556854-19FA-421C-9DE3-8516758EE865}
+		{3FFE7114-AE8A-4A9E-808E-C28FB2E18442} = {21556854-19FA-421C-9DE3-8516758EE865}
+		{ADECB4AA-144F-4502-A39D-AB445FA08BD0} = {969C3E01-D636-4569-B11E-68B5CFF1BB57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {635FA569-20F0-4D4C-91AA-E5745553CEB5}

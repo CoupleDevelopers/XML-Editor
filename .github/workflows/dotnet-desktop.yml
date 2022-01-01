@@ -21,8 +21,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: XMLEditor\XMLEditor.sln
-      Test_Project_Path: XMLOperations.Tests\XMLOperations.Tests.csproj
+      Solution_Name: XMLEditor.sln
+      Test_Project_Path: test\XMLOperations.Tests\XMLOperations.Tests.csproj
 
     steps:
     - name: Checkout
