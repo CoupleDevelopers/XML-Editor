@@ -5,36 +5,46 @@ namespace XMLOperations.Extensions
 {
     internal static class SearchExtensions
     {
-
+        /// <summary>
+        /// Filters xml nodes regarding given filter model
+        /// </summary>
+        /// <param name="query">root XElement to be filtered</param>
+        /// <param name="model">requested filter pattern</param>
         internal static IEnumerable<XElement> Filter(IEnumerable<XElement> query, XmlNodeSearchModel model)
         {
             if (model.ParentFilter == null && model.SearchingFilter == null && model.ChildFilter == null)
                 return query;
 
-
-
             return query
-                .CheckForFilter(model.ParentFilter, (x) => x.Parent)
-                .CheckForFilter(model.SearchingFilter, (x) => x)
-                .CheckForChildsFilter(model.ChildFilter, (x) => x);
+                .Filter(model.ParentFilter, (x) => x.Parent)
+                .Filter(model.SearchingFilter, (x) => x)
+                .ChildFilter(model.ChildFilter, (x) => x);
         }
 
         /// <summary>
-        /// 
-        /// </summary> 
-        private static IEnumerable<XElement> CheckForFilter
+        /// Filters xml nodes regarding given filter model
+        /// </summary>
+        private static IEnumerable<XElement> Filter
             (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement?> func)
             => query.CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func);
 
         /// <summary>
-        /// 
+        /// Filters immediate child nodes regarding given filter model
+        /// </summary>
+        private static IEnumerable<XElement> ChildFilter
+            (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement> func)
+            => query.SelectMany(x => x.Elements().CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func));
+
+        /// <summary>
+        /// Filters xml nodes having given element name
         /// </summary>
         private static IEnumerable<XElement> CheckForHeaderName
             (this IEnumerable<XElement> query, string? headerName, Func<XElement, XElement?> element)
-            => string.IsNullOrWhiteSpace(headerName) ?
-            throw new ArgumentException($"{nameof(headerName)} is not valid!")
-            : query.Where(x => element(x)?.Name.LocalName == headerName);
+            => string.IsNullOrWhiteSpace(headerName) ? query : query.Where(x => element(x)?.Name.LocalName == headerName);
 
+        /// <summary>
+        /// Filters xml nodes having given [attribute, value] pairs
+        /// </summary>
         private static IEnumerable<XElement> CheckForAttributesFilter
             (this IEnumerable<XElement> query, List<NodeAttributeFilter>? filters, Func<XElement, XElement?> checkFunction)
         {
@@ -49,56 +59,11 @@ namespace XMLOperations.Extensions
             return query;
         }
 
-        #region Children
-
         /// <summary>
-        /// 
-        /// </summary> 
-        private static IEnumerable<XElement> CheckForChildsFilter
-            (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement> func)
-            => query.CheckForChildsHeaderName(filter?.HeaderName, func).CheckForChildsAttributeFilter(filter?.AttributeFilters, func);
-
-
-        /// <summary>
-        /// 
-        /// </summary> 
-        private static IEnumerable<XElement> CheckForChildsHeaderName
-            (this IEnumerable<XElement> query, string? headerName, Func<XElement, XElement> element)
-            => string.IsNullOrWhiteSpace(headerName) ? query : query.SelectMany(x => x.Elements().CheckForHeaderName(headerName, element));
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private static IEnumerable<XElement> CheckForChildsAttributeFilter
-             (this IEnumerable<XElement> query, List<NodeAttributeFilter>? filters, Func<XElement, XElement> element)
-        {
-            if (filters == null || !filters.Any())
-                return query;
-
-            foreach (NodeAttributeFilter filter in filters)
-            {
-                query = query.CheckForChildsAttributeFilter(filter, element);
-            }
-
-            return query;
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary> 
-        private static IEnumerable<XElement> CheckForChildsAttributeFilter
-         (this IEnumerable<XElement> query, NodeAttributeFilter filter, Func<XElement, XElement> element)
-         => !filter.IsValid ? query : query.SelectMany(x => x.Elements().CheckForAttributeFilter(filter, element));
-
-        #endregion
-
-        /// <summary>
-        /// 
+        /// Filters xml nodes having given [attribute, value] pair
         /// </summary>
         private static IEnumerable<XElement> CheckForAttributeFilter
             (this IEnumerable<XElement> query, NodeAttributeFilter filter, Func<XElement, XElement?> element)
-            => !filter.IsValid ? query : query.Where(x => element(x)?.Attributes().Any(x => x.Name == filter.Attribute && (x.Value ?? "") == filter.Value) != null);
+            => !filter.IsValid ? query : query.Where(x => element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && (x.Value ?? "") == filter.Value) != null);
     }
 }
