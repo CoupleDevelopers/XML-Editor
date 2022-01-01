@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace XMLEditor
@@ -11,6 +12,10 @@ namespace XMLEditor
         public MainWindow()
         {
             InitializeComponent();
+            var vm = new MainWindowViewModel();
+            DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(() => Close());
         }
 
         private void DraggableWindow(object sender, MouseButtonEventArgs e)

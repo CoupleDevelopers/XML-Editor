@@ -4,24 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XMLEditor"
-        mc:Ignorable="d" Height="450" Width="800" MinWidth="800" MinHeight="450" 
+        mc:Ignorable="d" Height="800" Width="1300" MinWidth="1300" MinHeight="800" 
         WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" 
-        Background="#FF4515A0">
+        Background="#121212">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Background="Transparent" MouseDown="DraggableWindow">
+        <Grid Background="#1F1b24" MouseDown="DraggableWindow">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="ICON" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue"></Label>
-            <StackPanel Grid.Column="1">
-
-            </StackPanel>
+            <Label Content="ICON" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue"/>
+            <DockPanel Grid.Column="1">
+                <Button Content="CLOSE" HorizontalAlignment="Right" VerticalAlignment="Center" Background="AliceBlue" 
+                        Command="{Binding CloseAppCommand, Mode=OneWay}"
+                        CommandParameter="{Binding ElementName=MainWindow}"/>
+            </DockPanel>
             <Border Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="White" BorderThickness="0 0 0 1" />
         </Grid>
         <Grid Grid.Row="1">
@@ -29,6 +31,11 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
+
+            <StackPanel Background="#1F1b24">
+                
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Window>
