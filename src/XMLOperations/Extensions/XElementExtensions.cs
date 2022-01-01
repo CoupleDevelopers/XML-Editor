@@ -2,7 +2,7 @@
 
 namespace XMLOperations.Extensions
 {
-    internal static class XElementExtensions
+    public static class XElementExtensions
     {
 
         /// <summary>
@@ -16,7 +16,6 @@ namespace XMLOperations.Extensions
             return element.Attributes().Any(x => x.Name.LocalName == attribute && (withValue == null || x.Value == withValue));
         }
 
-
         /// <summary>
         /// Determines whether an XElement contains a specified attribute using <paramref name="predicate"/> function.
         /// </summary>
@@ -26,5 +25,13 @@ namespace XMLOperations.Extensions
 
             return element.Attributes().Any(x => predicate(x));
         }
+
+        /// <summary>
+        /// Determines whether an XElement has localName.
+        /// </summary>
+        public static bool HasLocalName(this XElement element, string localName)
+        => element.Name.LocalName == localName;
+
+         
     }
 }
