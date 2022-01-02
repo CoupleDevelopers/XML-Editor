@@ -46,6 +46,11 @@ namespace XMLOperations.Extensions
             {
                 query = query.FilterByAttributes(filter.AttributeFilters, elementPicker);
             }
+
+            if (filter.HasInnerText)
+            {
+                query = query.FilterByInnerText(filter.InnerText, elementPicker);
+            }
 #pragma warning restore CS8604 // Possible null reference argument.
 
             return query;
@@ -110,6 +115,17 @@ namespace XMLOperations.Extensions
                 throw new ArgumentException($"{nameof(attributeFilter)} is not valid");
 
             return query.Where(x => elementPicker(x)?.ContainsAttribute(attributeFilter.Attribute, attributeFilter.Value) == true);
+        }
+
+        /// <summary>
+        /// Filters xml nodes having given inner text
+        /// </summary>
+        private static IEnumerable<XElement> FilterByInnerText
+            (this IEnumerable<XElement> query, string innerText, Func<XElement, XElement> elementPicker)
+        {
+            Guard.AgainstNull(innerText, nameof(innerText));
+
+            return query.Where(x => elementPicker(x) != null && elementPicker(x).HasInnerText(innerText));
         }
     }
 }
