@@ -14,58 +14,105 @@ namespace XMLOperations.Extensions
         /// <param name="model">requested filter pattern</param>
         internal static IEnumerable<XElement> Filter(IEnumerable<XElement> query, XmlNodeSearchModel model)
         {
-            if (model.ParentFilter == null && model.SearchingFilter == null && model.ChildFilter == null)
-                return query;
+            if (model.ParentFilter != null && model.ParentFilter.IsValid)
+                query = query.Filter(model.ParentFilter, x => x.Parent!);
 
-            return query
-                .Filter(model.ParentFilter, (x) => x.Parent)
-                .Filter(model.SearchingFilter, (x) => x)
-                .ChildFilter(model.ChildFilter, (x) => x);
+            if (model.SearchingFilter != null && model.SearchingFilter.IsValid)
+                query = query.Filter(model.SearchingFilter, x => x);
+
+            if (model.ChildFilter != null && model.ChildFilter.IsValid)
+                query = query.FilterChildren(model.ChildFilter, x => x);
+
+            return query;
         }
 
         /// <summary>
         /// Filters xml nodes regarding given filter model
         /// </summary>
         private static IEnumerable<XElement> Filter
-            (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement?> func)
-            => query.CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func);
+            (this IEnumerable<XElement> query, NodeFilter filter, Func<XElement, XElement> elementPicker)
+        {
+            if (!filter.IsValid)
+                throw new ArgumentException("Filter has no header and attributes values");
+
+
+#pragma warning disable CS8604 // Possible null reference argument.
+            if (filter.HasHeaderName)
+            {
+                query = query.FilterByHeaderName(filter.HeaderName, elementPicker);
+            }
+
+            if (filter.HasAttributeFilters)
+            {
+                query = query.FilterByAttributes(filter.AttributeFilters, elementPicker);
+            }
+#pragma warning restore CS8604 // Possible null reference argument.
+
+            return query;
+        }
 
         /// <summary>
         /// Filters immediate child nodes regarding given filter model
         /// </summary>
-        private static IEnumerable<XElement> ChildFilter
-            (this IEnumerable<XElement> query, NodeFilter? filter, Func<XElement, XElement> func)
-            => filter == null ? query : query.Where(x => x.Elements().CheckForHeaderName(filter?.HeaderName, func).CheckForAttributesFilter(filter?.AttributeFilters, func).Any());
+        private static IEnumerable<XElement> FilterChildren(this IEnumerable<XElement> query,
+            NodeFilter filter, Func<XElement, XElement> elementPicker)
+        {
+            if (filter == null) throw new ArgumentNullException(nameof(filter));
+            if (!filter.IsValid) throw new ArgumentException($"{nameof(filter)} is not valid");
 
-        /// <summary>
-        /// Filters xml nodes having given element name
-        /// </summary>
-        private static IEnumerable<XElement> CheckForHeaderName
-            (this IEnumerable<XElement> query, string? headerName, Func<XElement, XElement?> element)
-            => string.IsNullOrWhiteSpace(headerName) ? query : query.Where(x => element(x)?.Name.LocalName == headerName);
+            query = query.Where(x => x.HasElements);
+
+            if (filter.HeaderName != null)
+                query = query.Where(x => x.Elements().FilterByHeaderName(filter.HeaderName, elementPicker).Any());
+
+            if (filter.AttributeFilters != null)
+                query = query.Where(x => x.Elements().FilterByAttributes(filter.AttributeFilters, elementPicker).Any());
+
+            return query;
+        }
 
         /// <summary>
         /// Filters xml nodes having given [attribute, value] pairs
         /// </summary>
-        private static IEnumerable<XElement> CheckForAttributesFilter
-            (this IEnumerable<XElement> query, List<NodeAttributeFilter>? filters, Func<XElement, XElement?> checkFunction)
+        private static IEnumerable<XElement> FilterByAttributes(this IEnumerable<XElement> query,
+            List<NodeAttributeFilter> filters, Func<XElement, XElement> elementPicker)
         {
             if (filters == null || !filters.Any())
-                return query;
+                throw new ArgumentException($"{nameof(filters)} required");
 
             foreach (NodeAttributeFilter filter in filters)
             {
-                query = query.CheckForAttributeFilter(filter, checkFunction);
+                query = query.FilterByAttribute(filter, elementPicker);
             }
 
             return query;
         }
 
         /// <summary>
+        /// Filters xml nodes having given element name
+        /// </summary>
+        private static IEnumerable<XElement> FilterByHeaderName
+            (this IEnumerable<XElement> query, string headerName, Func<XElement, XElement> elementPicker)
+        {
+            if (string.IsNullOrWhiteSpace(headerName))
+                throw new ArgumentException($"{nameof(headerName)} is required");
+
+            return query.Where(x => elementPicker(x) != null && elementPicker(x).HasLocalName(headerName));
+        }
+
+        /// <summary>
         /// Filters xml nodes having given [attribute, value] pair
         /// </summary>
-        private static IEnumerable<XElement> CheckForAttributeFilter
-            (this IEnumerable<XElement> query, NodeAttributeFilter filter, Func<XElement, XElement?> element)
-            => !filter.IsValid ? query : query.Where(x => (bool)(element(x)?.Attributes().Any(x => x.Name.LocalName == filter.Attribute && x.Value == filter.Value)));
+        private static IEnumerable<XElement> FilterByAttribute
+            (this IEnumerable<XElement> query, NodeAttributeFilter attributeFilter, Func<XElement, XElement?> elementPicker)
+        {
+            if (elementPicker == null)
+                throw new ArgumentNullException($"{nameof(elementPicker)} is null");
+
+            if (attributeFilter == null || !attributeFilter.IsValid)
+                throw new ArgumentException($"{nameof(attributeFilter)} is not valid");
+
+            return query.Where(x => elementPicker(x) != null && elementPicker(x).ContainsAttribute(attributeFilter.Attribute, attributeFilter.Value));
+        }
     }
 }
