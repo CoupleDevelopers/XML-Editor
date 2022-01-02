@@ -32,10 +32,11 @@
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Background="#1F1b24">
-                
+            <StackPanel Background="#1F1b24" Orientation="Vertical">
+                <Label Content="Settings" HorizontalAlignment="Center"
+                       Style="{StaticResource ResourceKey=PrimaryLabelStyle}"/>
             </StackPanel>
-            
+
         </Grid>
     </Grid>
 </Window>
