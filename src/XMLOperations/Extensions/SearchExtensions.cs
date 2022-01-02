@@ -77,8 +77,7 @@ namespace XMLOperations.Extensions
         private static IEnumerable<XElement> FilterByAttributes(this IEnumerable<XElement> query,
             List<NodeAttributeFilter> filters, Func<XElement, XElement> elementPicker)
         {
-            if (filters == null || !filters.Any())
-                throw new ArgumentException($"{nameof(filters)} required");
+            Guard.AgainstNullOrEmpty(filters, nameof(filters));
 
             foreach (NodeAttributeFilter filter in filters)
             {
@@ -94,8 +93,7 @@ namespace XMLOperations.Extensions
         private static IEnumerable<XElement> FilterByHeaderName
             (this IEnumerable<XElement> query, string headerName, Func<XElement, XElement> elementPicker)
         {
-            if (string.IsNullOrWhiteSpace(headerName))
-                throw new ArgumentException($"{nameof(headerName)} is required");
+            Guard.AgainstNullOrWhiteSpace(headerName, nameof(headerName));
 
             return query.Where(x => elementPicker(x) != null && elementPicker(x).HasLocalName(headerName));
         }
@@ -106,13 +104,12 @@ namespace XMLOperations.Extensions
         private static IEnumerable<XElement> FilterByAttribute
             (this IEnumerable<XElement> query, NodeAttributeFilter attributeFilter, Func<XElement, XElement?> elementPicker)
         {
-            if (elementPicker == null)
-                throw new ArgumentNullException($"{nameof(elementPicker)} is null");
+            Guard.AgainstNull(elementPicker, nameof(elementPicker));
 
             if (attributeFilter == null || !attributeFilter.IsValid)
                 throw new ArgumentException($"{nameof(attributeFilter)} is not valid");
 
-            return query.Where(x => elementPicker(x) != null && elementPicker(x).ContainsAttribute(attributeFilter.Attribute, attributeFilter.Value));
+            return query.Where(x => elementPicker(x)?.ContainsAttribute(attributeFilter.Attribute, attributeFilter.Value) == true);
         }
     }
 }
