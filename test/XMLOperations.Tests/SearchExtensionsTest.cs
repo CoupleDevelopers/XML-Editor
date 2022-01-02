@@ -12,7 +12,7 @@ namespace XMLOperations.Tests
         [InlineData(@"assets\XMLFile1.xml", "book", "id", "bk101")]
         public void ShouldFilterNodes_OnlyWithParentInformation(string filePath, string headerName, string attrName, string attrValue)
         {
-            // arrenge
+            // arrange
             // filter model with only parent information
             XmlNodeSearchModel model = new()
             {
