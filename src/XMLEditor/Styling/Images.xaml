@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="btn_off" UriSource="../assets/off_button_circle.png" />
+    <BitmapImage x:Key="btn_off_highlighted" UriSource="../assets/off_button_highlighted_circle.png" />
+</ResourceDictionary>

@@ -20,9 +20,24 @@
             </Grid.ColumnDefinitions>
             <Label Content="ICON" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AliceBlue"/>
             <DockPanel Grid.Column="1">
-                <Button Content="CLOSE" HorizontalAlignment="Right" VerticalAlignment="Center" Background="AliceBlue" 
-                        Command="{Binding CloseAppCommand, Mode=OneWay}"
-                        CommandParameter="{Binding ElementName=MainWindow}"/>
+                <Image HorizontalAlignment="Right" 
+                       Width="32" Height="32"
+                       Cursor="Hand"
+                       Margin="0 0 2 0">
+                    <Image.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding CloseAppCommand, Mode=OneTime}" />
+                    </Image.InputBindings>
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="{StaticResource ResourceKey=btn_off}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="{StaticResource ResourceKey=btn_off_highlighted}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </DockPanel>
             <Border Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="White" BorderThickness="0 0 0 1" />
         </Grid>
