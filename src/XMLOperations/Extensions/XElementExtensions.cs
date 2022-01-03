@@ -29,9 +29,11 @@ namespace XMLOperations.Extensions
         /// <summary>
         /// Determines whether an XElement has localName.
         /// </summary>
-        public static bool HasLocalName(this XElement element, string localName)
-        => element.Name.LocalName == localName;
+        public static bool HasLocalName(this XElement element, string localName) => element.Name.LocalName == localName;
 
-         
+        /// <summary>
+        /// Determines whether an XElement has given inner text
+        /// </summary>
+        public static bool HasInnerText(this XElement element, string innerText) => element.Value == innerText;
     }
 }
