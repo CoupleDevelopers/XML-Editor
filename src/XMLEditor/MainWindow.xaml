@@ -3,52 +3,125 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Height="800" Width="1300" MinWidth="1300" MinHeight="800"
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True"
+        mc:Ignorable="d"
+        Height="800"
+        Width="1300"
+        MinWidth="1300"
+        MinHeight="800"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
         Background="#121212">
-    <Grid>
+    <Grid RenderTransformOrigin="0.5,0.5"
+          Background="#FF0A0415">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="48" />
             <RowDefinition />
+            <RowDefinition  Height="24" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="182" />
+            <ColumnDefinition Width="182" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <ToolBarPanel Grid.Row="0"
-                    Grid.ColumnSpan="20"
-                      Background="#1F1b24"
-                      MouseDown="DraggableWindow">
-            <ToolBar  Background="#1F1b24"
-                      ToolBarTray.IsLocked="True"
-                      ToolBar.OverflowMode="Never"
-                      MouseDown="DraggableWindow">
-                <Label Content="ICON"
-                   HorizontalAlignment="Left"
-                   VerticalContentAlignment="Center"
-                   VerticalAlignment="Center"
-                   Background="AliceBlue" />
-                <Image HorizontalAlignment="Right"
-                       Width="32" Height="32"
-                       Cursor="Hand"
-                       Margin="0 0 2 0">
-                    <Image.InputBindings>
-                        <MouseBinding Gesture="LeftClick" Command="{Binding CloseAppCommand, Mode=OneTime}" />
-                    </Image.InputBindings>
-                    <Image.Style>
-                        <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="{StaticResource ResourceKey=btn_off}" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Source" Value="{StaticResource ResourceKey=btn_off_highlighted}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </ToolBar>
-            <!--<Border Grid.ColumnSpan="2" BorderBrush="White" BorderThickness="0 0 0 1" />-->
-        </ToolBarPanel>
+        <Label Content="☑ XMLEditor"
+               HorizontalAlignment="Center"
+               VerticalContentAlignment="Center"
+               VerticalAlignment="Center"
+               Foreground="White"
+               Height="50"
+               FontSize="24"
+               Background="{x:Null}" />
+        <Image Width="20"
+               Cursor="Hand"
+               HorizontalAlignment="Right"
+               RenderTransformOrigin="0,0"
+               Margin="1088,15,15,15"
+               Grid.Column="1">
+            <Image.InputBindings>
+                <MouseBinding Gesture="LeftClick"
+                              Command="{Binding CloseAppCommand, Mode=OneTime}" />
+            </Image.InputBindings>
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source"
+                            Value="{StaticResource ResourceKey=btn_off}" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Source"
+                                    Value="{StaticResource ResourceKey=btn_off_highlighted}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Button Grid.Column="1"
+                Content="File"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Background="{x:Null}"
+                Height="30"
+                Width="56"
+                Foreground="White"
+                BorderThickness="0,0,0,0"
+                Click="Button_Click" />
+        <Button Grid.Column="1"
+                Content="Edit"
+                HorizontalAlignment="Left"
+                Margin="71,0,0,0"
+                VerticalAlignment="Center"
+                Background="{x:Null}"
+                Height="30"
+                Width="56"
+                Foreground="White"
+                BorderThickness="0,0,0,0" />
+        <Button Grid.Column="1"
+                Content="Search"
+                HorizontalAlignment="Left"
+                Margin="132,0,0,0"
+                VerticalAlignment="Center"
+                Height="30"
+                Width="56"
+                Foreground="White"
+                BorderThickness="0,0,0,0"
+                Background="{x:Null}" />
+        <DockPanel x:Name="dockPanel"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="20"
+                   Background="#FF383838">
+            <GroupBox DockPanel.Dock="Left"
+                      ClipToBounds="True"
+                      BorderThickness="0,0,0,0"
+                      Margin="3,11,0,3"
+                      Background="#FF1D1D1D"
+                      Width="305" />
+            <GroupBox Margin="3,11,3,3"
+                      Background="#FF6D3737"
+                      BorderThickness="0,0,0,0"
+                      BorderBrush="White" />
+        </DockPanel>
+        <Border BorderThickness="0,0,0,0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Height="11"
+                VerticalAlignment="Top"
+                Margin="0,46,0,0"
+                Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                     StartPoint="0.5,0">
+                    <GradientStop Color="#FF3A3A3A" />
+                    <GradientStop Color="#FF140F1D"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <StatusBar Grid.Row="2"
+                   Grid.ColumnSpan="20"
+                   Background="#FF011933">
+        </StatusBar>
     </Grid>
 </Window>
