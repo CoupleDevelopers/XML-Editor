@@ -10,10 +10,8 @@
         MinHeight="800"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
-        AllowsTransparency="True"
-        Background="#121212">
-    <Grid RenderTransformOrigin="0.5,0.5"
-          Background="#FF0A0415">
+        AllowsTransparency="True">
+    <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="48" />
             <RowDefinition />
@@ -23,7 +21,11 @@
             <ColumnDefinition Width="182" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="2"
+              Background="#FF0A0415"
+              MouseDown="DraggableWindow">
+        </Grid>
         <Label Content="☑ XMLEditor"
                HorizontalAlignment="Center"
                VerticalContentAlignment="Center"
@@ -32,11 +34,11 @@
                Height="50"
                FontSize="24"
                Background="{x:Null}" />
-        <Image Width="20"
+        <Image Width="32"
                Cursor="Hand"
                HorizontalAlignment="Right"
                RenderTransformOrigin="0,0"
-               Margin="1088,15,15,15"
+               Margin="15,10,15,10"
                Grid.Column="1">
             <Image.InputBindings>
                 <MouseBinding Gesture="LeftClick"
