@@ -8,6 +8,8 @@
                 <ResourceDictionary Source="Styling\Styles.xaml" />
                 <ResourceDictionary Source="Styling\Colors.xaml" />
                 <ResourceDictionary Source="Styling\Images.xaml" />
+                <!--<ResourceDictionary Source="/AvalonDock.Themes.VS2013;component/DarkBrushs.xaml" />-->
+                <ResourceDictionary Source="/AvalonDock.Themes.VS2013;component/DarkBrushs.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

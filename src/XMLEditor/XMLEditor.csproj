@@ -8,13 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\**" />
+    <Compile Remove="View\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="Model\**" />
+    <None Remove="View\**" />
+    <Page Remove="Model\**" />
+    <Page Remove="View\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="assets\off_button_circle.png" />
     <None Remove="assets\off_button_highlighted_circle.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="View\" />
+    <PackageReference Include="AvalonEdit" Version="6.1.3.50" />
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.60.1" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.60.1" />
   </ItemGroup>
 
   <ItemGroup>
