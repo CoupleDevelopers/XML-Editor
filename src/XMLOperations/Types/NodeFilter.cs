@@ -11,5 +11,5 @@ public class NodeFilter
     public bool IsValid => HasHeaderName || HasAttributeFilters || HasInnerText;
     public bool HasHeaderName => !string.IsNullOrWhiteSpace(HeaderName);
     public bool HasInnerText => InnerText != null;
-    public bool HasAttributeFilters=> (AttributeFilters != null && AttributeFilters.Count > 0);
+    public bool HasAttributeFilters => (AttributeFilters != null && AttributeFilters.Count > 0);
 }

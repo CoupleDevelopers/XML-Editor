@@ -24,4 +24,3 @@ internal static class Guard
             throw new GuardException($"{field} is empty");
     }
 }
-

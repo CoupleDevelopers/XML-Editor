@@ -6,8 +6,8 @@
           Value="Center" />
         <Setter Property="VerticalContentAlignment"
           Value="Center" />
-        <Setter Property="Foreground" 
-                Value="{DynamicResource PrimaryLabelBrush}"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource PrimaryLabelBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Label">

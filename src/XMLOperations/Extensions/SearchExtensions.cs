@@ -1,7 +1,7 @@
-﻿using System.Xml.Linq;
-using XMLOperations.Types;
+﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using XMLOperations.Exceptions;
-using System.Runtime.CompilerServices;
+using XMLOperations.Types;
 
 [assembly: InternalsVisibleTo("XMLOperations.Tests")]
 
@@ -36,7 +36,6 @@ internal static class SearchExtensions
     {
         if (!filter.IsValid)
             throw new ArgumentException("Filter has no header and attributes values");
-
 
 #pragma warning disable CS8604 // Possible null reference argument.
         if (filter.HasHeaderName)

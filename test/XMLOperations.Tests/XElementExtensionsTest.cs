@@ -1,6 +1,6 @@
-﻿using System.Xml.Linq; 
-using Xunit;
+﻿using System.Xml.Linq;
 using XMLOperations.Extensions;
+using Xunit;
 
 namespace XMLOperations.Tests
 {
@@ -15,23 +15,21 @@ namespace XMLOperations.Tests
             Assert.False(element.ContainsAttribute(attributeName));
             Assert.False(element.ContainsAttribute(attributeName, null));
 
-
-            element.Add(new XAttribute("wrongAttribute","test"));
+            element.Add(new XAttribute("wrongAttribute", "test"));
             Assert.False(element.ContainsAttribute(attributeName));
             Assert.False(element.ContainsAttribute(attributeName, null));
 
-            element.Add(new XAttribute(attributeName, 3)); 
+            element.Add(new XAttribute(attributeName, 3));
             Assert.True(element.ContainsAttribute(attributeName));
             Assert.True(element.ContainsAttribute(attributeName, null));
             Assert.True(element.ContainsAttribute(attributeName, "3"));
-            Assert.True(element.ContainsAttribute(x=> x.Name == attributeName && x.Value == "3"));
+            Assert.True(element.ContainsAttribute(x => x.Name == attributeName && x.Value == "3"));
         }
-
 
         [Fact(DisplayName = nameof(AllowLocalNameCheck))]
         public void AllowLocalNameCheck()
         {
-            XElement element = new XElement("TestElement"); 
+            XElement element = new XElement("TestElement");
 
             Assert.True(element.HasLocalName("TestElement"));
             Assert.False(element.HasLocalName(""));

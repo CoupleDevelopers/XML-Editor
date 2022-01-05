@@ -8,6 +8,7 @@ namespace XMLEditor
         public Action CloseAction { get; set; }
 
         private ICommand _closeAppCommand;
+
         public ICommand CloseAppCommand
         {
             get
@@ -15,6 +16,7 @@ namespace XMLEditor
                 return _closeAppCommand ?? (_closeAppCommand = new CommandHandler(() => CloseWindow(), () => CanExecute));
             }
         }
+
         public bool CanExecute
         {
             get => CloseAction != null;

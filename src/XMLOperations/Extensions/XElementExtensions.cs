@@ -4,7 +4,6 @@ namespace XMLOperations.Extensions
 {
     public static class XElementExtensions
     {
-
         /// <summary>
         /// Determines whether an XElement contains a specified attribute by <see cref="XName.LocalName"/>
         /// <br />with <paramref name="withValue"/> if provided.
@@ -19,7 +18,7 @@ namespace XMLOperations.Extensions
         /// <summary>
         /// Determines whether an XElement contains a specified attribute using <paramref name="predicate"/> function.
         /// </summary>
-        public static bool ContainsAttribute(this XElement element, Func<XAttribute,bool> predicate)
+        public static bool ContainsAttribute(this XElement element, Func<XAttribute, bool> predicate)
         {
             if (!element.HasAttributes) return false;
 

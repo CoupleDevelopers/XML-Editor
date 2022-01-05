@@ -2,7 +2,6 @@
 
 namespace XMLOperations.Types;
 
-
 internal class XmlNodeModel
 {
     public XmlNodeModel Current { get; set; }
