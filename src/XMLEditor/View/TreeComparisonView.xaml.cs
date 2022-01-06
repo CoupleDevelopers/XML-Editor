@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace XMLEditor.View
 {
     /// <summary>
-    /// Interaction logic for XmlTreeView.xaml
+    /// Interaction logic for TreeComparisonView.xaml
     /// </summary>
-    public partial class XmlTreeView : UserControl
+    public partial class TreeComparisonView : UserControl
     {
-        public XmlTreeView()
+        public TreeComparisonView()
         {
             InitializeComponent();
         }
