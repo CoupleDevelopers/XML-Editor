@@ -7,13 +7,10 @@ namespace XMLEditor.ViewModel
 {
     internal class TreeViewModel
     {
-        private readonly List<Tree> m_TreeData;
-        public List<Tree> TreeData => m_TreeData;
+        public TreeNode? RootNode { get; private set; }
 
         public TreeViewModel()
         {
-            m_TreeData = new List<Tree>();
-
 #warning Needs to be loaded with Load File button
             var filePath = @"C:\Users\Volkan\Desktop\WorkSpace\Github\XML-Editor\test\XMLOperations.Tests\Assets\XMLFile1.xml";
             LoadTreeFromFile(filePath);
@@ -27,18 +24,16 @@ namespace XMLEditor.ViewModel
             }
 
             var root = XDocument.Load(filePath).Root;
-            m_TreeData.Clear();
+
             if (root == null)
                 return;
 
-            var tree = BuildTreeRecursive(root);
-
-            m_TreeData.Add(tree);
+            RootNode = BuildTreeRecursive(root);
         }
 
-        private Tree BuildTreeRecursive(XElement element)
+        private TreeNode BuildTreeRecursive(XElement element)
         {
-            Tree tree = new()
+            TreeNode tree = new()
             {
                 Name = element.Name.LocalName
             };
