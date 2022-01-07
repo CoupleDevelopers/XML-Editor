@@ -1,8 +1,7 @@
-﻿using System.Xml.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using XMLEditor.Model;
-using System.Linq;
-using System.Collections.Generic;
-using System;
 
 namespace XMLEditor.ViewModel
 {
@@ -14,32 +13,43 @@ namespace XMLEditor.ViewModel
         public TreeViewModel()
         {
             m_TreeData = new List<Tree>();
-            CreateTree();
+
+#warning Needs to be loaded with Load File button
+            var filePath = @"C:\Users\Volkan\Desktop\WorkSpace\Github\XML-Editor\test\XMLOperations.Tests\Assets\XMLFile1.xml";
+            LoadTreeFromFile(filePath);
         }
 
-        private void CreateTree()
+        private void LoadTreeFromFile(string filePath)
         {
-            var root = XDocument.Load(@"C:\Users\t-mac\Desktop\XML-Editor\test\XMLOperations.Tests\assets\XMLFile1.xml").Root;
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(filePath);
+            }
+
+            var root = XDocument.Load(filePath).Root;
             m_TreeData.Clear();
             if (root == null)
                 return;
 
-            var tree = new Tree();
-            BuildTreeRecursive(tree, root);
+            var tree = BuildTreeRecursive(root);
+
             m_TreeData.Add(tree);
         }
 
-        private void BuildTreeRecursive(Tree tree, XElement root)
+        private Tree BuildTreeRecursive(XElement element)
         {
-            var firstLevel = root.Elements();
-            tree.Name = root.Name.LocalName;
-            tree.ChildrenCount = firstLevel.Count();
-            tree.Children = new List<Tree>();
+            Tree tree = new()
+            {
+                Name = element.Name.LocalName
+            };
+
+            var firstLevel = element.Elements();
             foreach (var child in firstLevel)
             {
-                tree.Children.Add(new Tree() { Name = child.Name.LocalName, ChildrenCount = child.Elements().Count(), Children = new List<Tree>() });
-                BuildTreeRecursive(tree.Children.Last(), child);
+                tree.Children.Add(BuildTreeRecursive(child));
             }
+
+            return tree;
         }
     }
 }
