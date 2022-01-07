@@ -9,6 +9,8 @@ namespace XMLEditor.ViewModel
     {
         public TreeNode? RootNode { get; private set; }
 
+        public List<TreeNode?> TreeData => new List<TreeNode?>() { RootNode };
+
         public TreeViewModel()
         {
 #warning Needs to be loaded with Load File button
