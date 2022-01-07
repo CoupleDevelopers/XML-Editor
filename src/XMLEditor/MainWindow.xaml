@@ -59,37 +59,50 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Button Grid.Column="1"
-                Content="File"
-                HorizontalAlignment="Left"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Background="{x:Null}"
-                Height="30"
-                Width="56"
-                Foreground="White"
-                BorderThickness="0,0,0,0"
-                Click="Button_Click" />
-        <Button Grid.Column="1"
-                Content="Edit"
-                HorizontalAlignment="Left"
-                Margin="71,0,0,0"
-                VerticalAlignment="Center"
-                Background="{x:Null}"
-                Height="30"
-                Width="56"
-                Foreground="White"
-                BorderThickness="0,0,0,0" />
-        <Button Grid.Column="1"
-                Content="Search"
-                HorizontalAlignment="Left"
-                Margin="132,0,0,0"
-                VerticalAlignment="Center"
-                Height="30"
-                Width="56"
-                Foreground="White"
-                BorderThickness="0,0,0,0"
-                Background="{x:Null}" />
+        <Menu x:Name="applicationMenu"
+              Margin="0,0,0,0"
+              Grid.Column="1"
+              Background="{x:Null}">
+            <MenuItem Header="File"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Margin="10,16,0,0"
+                      Foreground="White"
+                      FontSize="14">
+                <MenuItem x:Name="btnNewFile"
+                          Header="New"
+                          Foreground="Black" />
+                <MenuItem Header="_Load"
+                          Foreground="Black" />
+                <MenuItem Header="_Save"
+                          Foreground="Black" />
+                <MenuItem Header="_Validate"
+                          Foreground="Black" />
+                <MenuItem Header="_Import"
+                          Foreground="Black" />
+                <MenuItem Header="_Export"
+                          Foreground="Black" />
+            </MenuItem>
+            <MenuItem Header="Edit"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Margin="10,16,0,0"
+                      Foreground="White"
+                      FontSize="14"
+                      Width="Auto">
+                <MenuItem Header="Cut" />
+                <MenuItem Header="Copy" />
+                <MenuItem Header="Paste" />
+            </MenuItem>
+            <MenuItem Header="Search"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Foreground="White"
+                      FontSize="14"
+                      Margin="10,16,0,0">
+            </MenuItem>
+        </Menu>
+
         <DockPanel x:Name="dockPanel"
                    Grid.Row="1"
                    Grid.ColumnSpan="20"
@@ -105,7 +118,8 @@
                       BorderThickness="0,0,0,0"
                       BorderBrush="White">
                 <StackPanel>
-                    <View:TreeView />
+                    <View:TreeView x:Name="tvMain"
+                                   Height="704" />
                 </StackPanel>
             </GroupBox>
         </DockPanel>
