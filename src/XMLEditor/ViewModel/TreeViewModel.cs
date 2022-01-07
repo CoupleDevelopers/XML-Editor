@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
+using XMLEditor.Extensions;
 using XMLEditor.Model;
 
 namespace XMLEditor.ViewModel
@@ -27,26 +28,7 @@ namespace XMLEditor.ViewModel
 
             var root = XDocument.Load(filePath).Root;
 
-            if (root == null)
-                return;
-
-            RootNode = BuildTreeRecursive(root);
-        }
-
-        private TreeNode BuildTreeRecursive(XElement element)
-        {
-            TreeNode tree = new()
-            {
-                Name = element.Name.LocalName
-            };
-
-            var firstLevel = element.Elements();
-            foreach (var child in firstLevel)
-            {
-                tree.Children.Add(BuildTreeRecursive(child));
-            }
-
-            return tree;
+            RootNode = root.ToTreeNode();
         }
     }
 }
