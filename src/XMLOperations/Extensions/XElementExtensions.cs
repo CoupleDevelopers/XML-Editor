@@ -40,16 +40,18 @@ namespace XMLOperations.Extensions
         {
             if (element == null) return null;
 
-            TreeNode node = new()
-            {
-                Name = element.Name.LocalName
-            };
+            TreeNode node = new(element.Name.LocalName);
 
-            var childs = element.Elements();
+            var children = element.Elements();
 
-            foreach (var child in childs)
+            foreach (var child in children)
             {
                 node.Children.Add(child.ToTreeNode()!);
+            }
+
+            foreach (var attribute in element.Attributes())
+            {
+                node.Attributes.Add(attribute.Name.LocalName, attribute.Value);
             }
 
             return node;
