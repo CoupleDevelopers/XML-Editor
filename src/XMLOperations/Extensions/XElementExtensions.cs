@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using XMLOperations.Types;
 
 namespace XMLOperations.Extensions
 {
@@ -34,5 +35,24 @@ namespace XMLOperations.Extensions
         /// Determines whether an XElement has given inner text
         /// </summary>
         public static bool HasInnerText(this XElement element, string innerText) => element.Value == innerText;
+
+        public static TreeNode? ToTreeNode(this XElement? element)
+        {
+            if (element == null) return null;
+
+            TreeNode node = new()
+            {
+                Name = element.Name.LocalName
+            };
+
+            var childs = element.Elements();
+
+            foreach (var child in childs)
+            {
+                node.Children.Add(child.ToTreeNode()!);
+            }
+
+            return node;
+        }
     }
 }

@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\XMLOperations\XMLOperations.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="assets\off_button_circle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
