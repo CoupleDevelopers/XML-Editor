@@ -39,8 +39,9 @@
             <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                 <TextBlock>
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} ({1})">
+                        <MultiBinding StringFormat="{}&lt;{0} {1} &gt; ({2})">
                             <Binding Path="Name" />
+                            <Binding Path="AttributesString" />
                             <Binding Path="ChildrenCount" />
                         </MultiBinding>
                     </TextBlock.Text>

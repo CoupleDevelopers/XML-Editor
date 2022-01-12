@@ -113,13 +113,15 @@
                       Margin="3,11,0,3"
                       Background="#FF1D1D1D"
                       Width="305" />
-            <GroupBox Margin="3,11,3,3"
+            <GroupBox x:Name="viewGroup"
+                      Margin="3,11,3,3"
                       Background="#FF6D3737"
                       BorderThickness="0,0,0,0"
                       BorderBrush="White">
                 <StackPanel>
                     <View:TreeView x:Name="tvMain"
-                                   Height="704" />
+                                   Height="701"
+                                   ScrollViewer.CanContentScroll="True" />
                 </StackPanel>
             </GroupBox>
         </DockPanel>
