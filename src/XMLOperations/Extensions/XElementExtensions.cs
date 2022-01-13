@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using XMLOperations.Types;
+using static XMLOperations.Configuration.OperationOptions;
 
 namespace XMLOperations.Extensions
 {
@@ -36,7 +37,7 @@ namespace XMLOperations.Extensions
         /// </summary>
         public static bool HasInnerText(this XElement element, string innerText) => element.Value == innerText;
 
-        public static TreeNode? ToTreeNode(this XElement? element)
+        public static TreeNode? ToTreeNode(this XElement? element, TreeViewConfig? config = null)
         {
             if (element == null) return null;
 
@@ -46,12 +47,15 @@ namespace XMLOperations.Extensions
 
             foreach (var child in children)
             {
-                node.Children.Add(child.ToTreeNode()!);
+                node.Children.Add(child.ToTreeNode(config)!);
             }
 
-            foreach (var attribute in element.Attributes())
+            if (config?.ShowAttributes ?? false)
             {
-                node.Attributes.Add(attribute.Name.LocalName, attribute.Value);
+                foreach (var attribute in element.Attributes())
+                {
+                    node.Attributes.Add(attribute.Name.LocalName, attribute.Value);
+                }
             }
 
             return node;

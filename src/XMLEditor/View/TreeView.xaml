@@ -3,50 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:XMLEditor.View"
              xmlns:vm="clr-namespace:XMLEditor.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <!--<UserControl.DataContext>
+    <UserControl.DataContext>
         <vm:TreeViewModel />
-    </UserControl.DataContext>-->
+    </UserControl.DataContext>
     <TreeView ItemsSource="{Binding TreeData}">
-        <!--<TreeView.ItemContainerStyle>
-            -->
-        <!--
-    This Style binds a TreeViewItem to a PersonViewModel.
-    -->
-        <!--
-            <Style TargetType="{x:Type TreeViewItem}">
-                <Setter Property="IsExpanded"
-                        Value="{Binding IsExpanded, Mode=TwoWay}" />
-                <Setter Property="IsSelected"
-                        Value="{Binding IsSelected, Mode=TwoWay}" />
-                <Setter Property="FontWeight"
-                        Value="Normal" />
-                <Style.Triggers>
-                    <Trigger Property="IsSelected"
-                             Value="True">
-                        <Setter Property="FontWeight"
-                                Value="Bold" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </TreeView.ItemContainerStyle>-->
-
         <TreeView.ItemTemplate>
             <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                 <TextBlock>
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}&lt;{0} {1} &gt; ({2})">
+                        <MultiBinding StringFormat="&lt;{0} {1} &gt; ({2})">
                             <Binding Path="Name" />
                             <Binding Path="AttributesString" />
                             <Binding Path="ChildrenCount" />
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <!--</TextBlock> Text="{Binding Name}" />-->
             </HierarchicalDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>

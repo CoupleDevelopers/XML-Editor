@@ -7,9 +7,8 @@ namespace XMLEditor.ViewModel
 {
     internal class TreeViewModel
     {
-        public TreeNode? RootNode { get; private set; }
-
-        public List<TreeNode?> TreeData => new List<TreeNode?>() { RootNode };
+        private TreeNode? m_RootNode;
+        public List<TreeNode?> TreeData => new() { m_RootNode };
 
         public TreeViewModel()
         {
@@ -18,7 +17,9 @@ namespace XMLEditor.ViewModel
 
             var task = Task.Run(async () =>
             {
-                RootNode = await FileOperations.LoadTreeFromUrlAsync("https://services.odata.org/v3/northwind/northwind.svc/$metadata");
+#warning Implement Config Usage - Take input from UI
+                //TreeViewConfig
+                m_RootNode = await FileOperations.LoadTreeFromUrlAsync("https://services.odata.org/v3/northwind/northwind.svc/$metadata");
             });
             task.Wait();
         }

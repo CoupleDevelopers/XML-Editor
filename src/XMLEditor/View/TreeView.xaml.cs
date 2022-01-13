@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using XMLEditor.ViewModel;
 
 namespace XMLEditor.View
 {
@@ -11,7 +10,6 @@ namespace XMLEditor.View
         public TreeView()
         {
             InitializeComponent();
-            DataContext = new TreeViewModel();
         }
     }
 }

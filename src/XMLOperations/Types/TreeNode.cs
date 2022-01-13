@@ -10,7 +10,6 @@ public class TreeNode
 
     public string Name { get; set; }
 
-#warning TreeView needs to be updated for attributes.
     public Dictionary<string, string> Attributes { get; set; }
 
     public int ChildrenCount => Children.Count;
