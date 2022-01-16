@@ -4,12 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:XMLEditor.ViewModel"
+             xmlns:View="clr-namespace:XMLEditor.View"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:TreeComparisonViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="ToggleBtn"
+               TargetType="{x:Type ToggleButton}"
+               BasedOn="{StaticResource ToggleButtonStyle}">
+            <Style.Setters>
+                <Setter Property="Width"
+                        Value="80" />
+                <Setter Property="Height"
+                        Value="25" />
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.ColumnSpan="2">
+            <ToggleButton HorizontalAlignment="Left"
+                          Style="{StaticResource ToggleBtn}"
+                          Cursor="Hand" />
+        </DockPanel>
+
+        <View:TreeView x:Name="tvLeft"
+                       ScrollViewer.CanContentScroll="True"
+                       Grid.Column="0"
+                       Grid.Row="1" />
+        <View:TreeView x:Name="tvRight"
+                       ScrollViewer.CanContentScroll="True"
+                       Grid.Column="1"
+                       Grid.Row="1" />
     </Grid>
 </UserControl>

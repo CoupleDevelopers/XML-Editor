@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="PrimaryLabelStyle"
-       TargetType="Label">
+           TargetType="Label">
         <Setter Property="HorizontalContentAlignment"
-          Value="Center" />
+                Value="Center" />
         <Setter Property="VerticalContentAlignment"
-          Value="Center" />
+                Value="Center" />
         <Setter Property="Foreground"
                 Value="{DynamicResource PrimaryLabelBrush}" />
         <Setter Property="Template">
@@ -13,9 +13,96 @@
                 <ControlTemplate TargetType="Label">
                     <Border>
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            RecognizesAccessKey="True" />
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeThickness="1"
+                               StrokeDashArray="1 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToggleButtonStyle"
+           TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource ButtonFocusVisual}" />
+        <Setter Property="Background"
+                Value="LightGray" />
+        <Setter Property="BorderBrush"
+                Value="#FF707070" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="Padding"
+                Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        <Border x:Name="left"
+                                Background="LightGray"
+                                CornerRadius="6,0,0,6"
+                                Grid.Column="0">
+                            <TextBlock x:Name="leftText"
+                                       Text="Tree"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                        <Border x:Name="right"
+                                Background="LightGray"
+                                CornerRadius="0,6,6,0"
+                                Grid.Column="1">
+                            <TextBlock x:Name="rightText"
+                                       Text="Result"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="true">
+                            <Setter TargetName="left"
+                                    Property="Background"
+                                    Value="green" />
+                            <Setter TargetName="leftText"
+                                    Property="Foreground"
+                                    Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"
+                                 Value="False">
+                            <Setter TargetName="right"
+                                    Property="Background"
+                                    Value="green" />
+                            <Setter TargetName="rightText"
+                                    Property="Foreground"
+                                    Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
