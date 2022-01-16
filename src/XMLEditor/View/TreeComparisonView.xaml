@@ -7,7 +7,8 @@
              xmlns:v="clr-namespace:XMLEditor.View"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignWidth="800"
+             x:Name="customTreeComparison">
     <UserControl.DataContext>
         <vm:TreeComparisonViewModel />
     </UserControl.DataContext>
@@ -38,8 +39,7 @@
         <DockPanel Grid.ColumnSpan="2">
             <ToggleButton x:Name="toggleBtn"
                           HorizontalAlignment="Left"
-                          Style="{StaticResource ToggleBtn}"
-                          Command="{Binding ToggleContent}" />
+                          Style="{StaticResource ToggleBtn}" />
         </DockPanel>
 
         <ContentPresenter Content="{Binding}"
@@ -56,10 +56,12 @@
                         </Grid.ColumnDefinitions>
                         <v:TreeView x:Name="tvLeft"
                                     ScrollViewer.CanContentScroll="True"
-                                    Grid.Column="0" />
+                                    Grid.Column="0"
+                                    SourceLabel="{Binding Path=DataContext.LeftTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
                         <v:TreeView x:Name="tvRight"
                                     ScrollViewer.CanContentScroll="True"
-                                    Grid.Column="1" />
+                                    Grid.Column="1"
+                                    SourceLabel="{Binding Path=DataContext.RightTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate x:Key="ComparisonResults">
