@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using XMLOperations.Types;
 
 namespace XMLEditor.View
 {
@@ -17,6 +19,15 @@ namespace XMLEditor.View
 
         public static readonly DependencyProperty SourceLabelProperty =
             DependencyProperty.Register("SourceLabel", typeof(string), typeof(TreeView), new PropertyMetadata(string.Empty));
+
+        public List<TreeNode?> SourceTree
+        {
+            get { return (List<TreeNode?>)GetValue(SourceTreeProperty); }
+            set { SetValue(SourceTreeProperty, value); }
+        }
+
+        public static readonly DependencyProperty SourceTreeProperty =
+            DependencyProperty.Register("SourceTree", typeof(List<TreeNode?>), typeof(TreeView), new PropertyMetadata());
 
         public TreeView()
         {

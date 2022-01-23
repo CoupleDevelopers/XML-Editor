@@ -57,11 +57,13 @@
                         <v:TreeView x:Name="tvLeft"
                                     ScrollViewer.CanContentScroll="True"
                                     Grid.Column="0"
-                                    SourceLabel="{Binding Path=DataContext.LeftTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
+                                    SourceLabel="{Binding Path=DataContext.LeftTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}"
+                                    SourceTree="{Binding Path=DataContext.LeftRootNode, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
                         <v:TreeView x:Name="tvRight"
                                     ScrollViewer.CanContentScroll="True"
                                     Grid.Column="1"
-                                    SourceLabel="{Binding Path=DataContext.RightTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
+                                    SourceLabel="{Binding Path=DataContext.RightTreeName, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}"
+                                    SourceTree="{Binding Path=DataContext.RightRootNode, ElementName=customTreeComparison, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DataTemplate>
                 <DataTemplate x:Key="ComparisonResults">

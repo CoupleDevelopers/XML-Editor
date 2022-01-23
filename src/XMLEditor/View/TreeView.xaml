@@ -17,7 +17,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding Path=SourceLabel, ElementName=customTreeView}" />
-        <TreeView ItemsSource="{Binding TreeData}"
+        <TreeView ItemsSource="{Binding Path=SourceTree, ElementName=customTreeView}"
                   Grid.Row="1">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
