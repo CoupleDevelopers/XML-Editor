@@ -10,7 +10,7 @@ public class TreeNode
 
     public string Name { get; set; }
 
-    public Dictionary<string, string> Attributes { get; set; }
+    public Dictionary<string, string> Attributes { get; private set; }
 
     public int ChildrenCount => Children.Count;
 
