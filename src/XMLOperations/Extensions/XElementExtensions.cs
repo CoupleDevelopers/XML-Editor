@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Xml;
+using System.Xml.Linq;
 using XMLOperations.Types;
 using static XMLOperations.Configuration.OperationOptions;
 
@@ -43,6 +44,12 @@ namespace XMLOperations.Extensions
 
             TreeNode node = new(element.Name.LocalName);
 
+            var lineInfo = (IXmlLineInfo)element;
+
+            if (lineInfo.LineNumber == 0)
+                throw new ArgumentOutOfRangeException("File not loaded with option SetLineInfo LineNumber required.");
+
+            node.LineNumber = lineInfo.LineNumber;
             var children = element.Elements();
 
             foreach (var child in children)

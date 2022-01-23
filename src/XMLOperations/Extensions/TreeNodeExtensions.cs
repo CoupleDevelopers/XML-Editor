@@ -10,14 +10,10 @@ namespace XMLOperations.Common
         /// <param name="node">Main node</param>
         /// <param name="other">Node for Comparison</param>
         /// <param name="checkAttributes"></param>
-        /// <param name="orderAttributes">Orders attributes by name before checking equality</param>
-#warning order needs to be implemented after structural checks
-
         public static bool Equal(
             this TreeNode? node,
             TreeNode? other,
-            bool checkAttributes = false,
-            bool orderAttributes = false)
+            bool checkAttributes = false)
         {
             if (node == null && other == null)
                 return true;

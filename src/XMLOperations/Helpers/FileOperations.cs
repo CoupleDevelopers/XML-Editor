@@ -15,7 +15,7 @@ public static class FileOperations
         }
 
         using FileStream stream = File.OpenRead(filePath);
-        var root = (await XDocument.LoadAsync(stream, LoadOptions.None, CancellationToken.None)).Root;
+        var root = (await XDocument.LoadAsync(stream, LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo, CancellationToken.None)).Root;
         return root.ToTreeNode();
     }
 
@@ -26,7 +26,7 @@ public static class FileOperations
 
         using StreamReader streamReader = new(await response.Content.ReadAsStreamAsync());
         string resultString = await streamReader.ReadToEndAsync();
-        var root = XDocument.Parse(resultString).Root;
+        var root = XDocument.Parse(resultString, LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo).Root;
         return root.ToTreeNode(config);
     }
 }

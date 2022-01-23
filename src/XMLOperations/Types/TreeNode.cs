@@ -17,4 +17,5 @@ public class TreeNode
     public string AttributesString => string.Join(" ", Attributes.Select(x => $"{x.Key}=\"{x.Value}\""));
 
     public List<TreeNode> Children { get; set; } = new List<TreeNode>();
+    public int LineNumber { get; internal set; }
 }
