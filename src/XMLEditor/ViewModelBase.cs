@@ -15,9 +15,8 @@ namespace XMLEditor
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> selectorExpression)
         {
             if (selectorExpression == null)
-                throw new ArgumentNullException("selectorExpression");
-            MemberExpression? body = selectorExpression.Body as MemberExpression;
-            if (body == null)
+                throw new ArgumentNullException(nameof(selectorExpression));
+            if (selectorExpression.Body is not MemberExpression body)
                 throw new ArgumentException("The body must be a member expression");
             OnPropertyChanged(body.Member.Name);
         }

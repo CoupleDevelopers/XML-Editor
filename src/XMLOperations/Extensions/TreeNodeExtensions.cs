@@ -11,6 +11,8 @@ namespace XMLOperations.Common
         /// <param name="other">Node for Comparison</param>
         /// <param name="checkAttributes"></param>
         /// <param name="orderAttributes">Orders attributes by name before checking equality</param>
+#warning order needs to be implemented after structural checks
+
         public static bool Equal(
             this TreeNode? node,
             TreeNode? other,

@@ -50,8 +50,8 @@ namespace XMLOperations.Tests
         [Fact(DisplayName = nameof(ShouldReturnFalse_WhenOneOfThemHaveDifferentName))]
         public void ShouldReturnFalse_WhenOneOfThemHaveDifferentName()
         {
-            TreeNode? node = new TreeNode("test1");
-            TreeNode? other = new TreeNode("test2");
+            TreeNode? node = new("test1");
+            TreeNode? other = new("test2");
 
             bool equality = node.Equal(other);
 
@@ -61,8 +61,8 @@ namespace XMLOperations.Tests
         [Fact(DisplayName = nameof(ShouldReturnFalse_WhenAttributesAreDifferent))]
         public void ShouldReturnFalse_WhenAttributesAreDifferent()
         {
-            TreeNode? node = new TreeNode("test");
-            TreeNode? other = new TreeNode("test");
+            TreeNode? node = new("test");
+            TreeNode? other = new("test");
             node.Attributes.Add("key1", "value1");
             node.Attributes.Add("key2", "value2");
             other.Attributes.Add("key2", "value2");
@@ -76,8 +76,8 @@ namespace XMLOperations.Tests
         [Fact(DisplayName = nameof(ShouldReturnTrue_WhenAttributesAreSame))]
         public void ShouldReturnTrue_WhenAttributesAreSame()
         {
-            TreeNode? node = new TreeNode("test");
-            TreeNode? other = new TreeNode("test");
+            TreeNode? node = new("test");
+            TreeNode? other = new("test");
 
             node.Attributes.Add("key1", "value1");
             node.Attributes.Add("key2", "value2");

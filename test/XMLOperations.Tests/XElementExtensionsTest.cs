@@ -11,7 +11,7 @@ namespace XMLOperations.Tests
         {
             string attributeName = "id";
 
-            XElement element = new XElement(nameof(element));
+            XElement element = new(nameof(element));
             Assert.False(element.ContainsAttribute(attributeName));
             Assert.False(element.ContainsAttribute(attributeName, null));
 
@@ -29,7 +29,7 @@ namespace XMLOperations.Tests
         [Fact(DisplayName = nameof(AllowLocalNameCheck))]
         public void AllowLocalNameCheck()
         {
-            XElement element = new XElement("TestElement");
+            XElement element = new("TestElement");
 
             Assert.True(element.HasLocalName("TestElement"));
             Assert.False(element.HasLocalName(""));
