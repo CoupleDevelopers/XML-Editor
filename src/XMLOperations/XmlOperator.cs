@@ -1,6 +1,6 @@
-﻿using XMLOperations.Interfaces;
+﻿using System.Runtime.CompilerServices;
 using XMLOperations.Configuration;
-using System.Runtime.CompilerServices;
+using XMLOperations.Interfaces;
 
 namespace XMLOperations;
 
@@ -13,11 +13,10 @@ public class XmlOperator : IXmlOperator
 
     public void Operate(FileInfo file, OperationOptions options)
     {
-        if (!IsExtensionCorrect(file.Extension)) return; 
+        if (!IsExtensionCorrect(file.Extension)) return;
         throw new NotImplementedException();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private bool IsExtensionCorrect(string extension) => extension == ".xml";
 }
-

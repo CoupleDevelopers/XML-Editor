@@ -6,4 +6,3 @@ internal class GuardException : Exception
     {
     }
 }
-

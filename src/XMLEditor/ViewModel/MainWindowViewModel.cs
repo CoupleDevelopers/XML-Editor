@@ -5,16 +5,18 @@ namespace XMLEditor
 {
     internal class MainWindowViewModel
     {
-        public Action CloseAction { get; set; }
+        public Action? CloseAction { get; set; }
 
-        private ICommand _closeAppCommand;
+        private ICommand? _closeAppCommand;
+
         public ICommand CloseAppCommand
         {
             get
             {
-                return _closeAppCommand ?? (_closeAppCommand = new CommandHandler(() => CloseWindow(), () => CanExecute));
+                return _closeAppCommand ??= new CommandHandler(() => CloseWindow(), () => CanExecute);
             }
         }
+
         public bool CanExecute
         {
             get => CloseAction != null;
@@ -22,7 +24,7 @@ namespace XMLEditor
 
         public void CloseWindow()
         {
-            CloseAction();
+            CloseAction?.Invoke();
         }
     }
 }

@@ -1,8 +1,8 @@
-using Xunit;
-using XMLOperations.Types;
+using System.Linq;
 using System.Xml.Linq;
 using XMLOperations.Extensions;
-using System.Linq;
+using XMLOperations.Types;
+using Xunit;
 
 namespace XMLOperations.Tests
 {

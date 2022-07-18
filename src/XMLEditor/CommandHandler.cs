@@ -20,7 +20,7 @@ namespace XMLEditor
         }
 
         /// <summary>
-        /// Wires CanExecuteChanged event 
+        /// Wires CanExecuteChanged event
         /// </summary>
         public event EventHandler CanExecuteChanged
         {

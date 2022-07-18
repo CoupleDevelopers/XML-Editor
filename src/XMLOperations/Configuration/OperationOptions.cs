@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace XMLOperations.Configuration
+﻿namespace XMLOperations.Configuration
 {
     public class OperationOptions
     {
+        /// <summary>
+        ///Configuration for treeview display of an xml element
+        /// </summary>
+        public class TreeViewConfig
+        {
+            public bool ShowAttributes { get; set; }
+        }
     }
 }
